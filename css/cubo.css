@@ -1,0 +1,120 @@
+
+/*
+
+h2{
+	font-size: 2.4em;
+}
+
+label{
+	color: red;
+}
+
+*/
+
+.roll{
+	visibility: hidden;
+}
+
+.cara{
+    background-image: url("../images/serie.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    opacity: 1;
+}
+
+.botones{
+	float: left;
+	width: 40%;	
+}
+
+.cubito{
+	float: right;
+	margin-right: 15%;
+	margin-top: 10%;
+
+}
+
+.numero2{
+	font-size: 350px;
+	margin-top: 60px;
+	margin-left: -25px;
+	color: black;
+}
+
+.numero1{
+	font-size: 350px;
+	margin-top: 60px;
+	margin-left: 30px;
+	color: black;
+}
+
+.sizer1{
+	font-size: 120px;
+	margin-top: 60px;
+	margin-left: 10px;
+	color: black;
+}
+
+.sizer2{
+	font-size: 120px;
+	margin-top: 60px;
+	margin-left: -60px;
+	color: black;
+}
+
+.botons{
+	float: left;
+	
+}
+
+.cambiar{
+	border: 1px solid white;
+	background-color: white;
+	color: blue;
+	width: 40%;
+	margin: auto;
+	opacity: 0.6;
+	border-radius: 10px;
+	text-align: center;
+	visibility: visible;
+}
+
+.points1,.points2,.points3,.points4,.points5,.points6,.points7,.points8,.points9,.points10,.points11,.points12,.points13,.points14,.points15,.points16,.points17,.points18,.points19,.points20{
+	position: absolute;
+	z-index: 50;
+}
+
+
+.centrar1,.centrar2,.centrar3,.centrar4,.centrar5,.centrar6{
+	position: absolute;
+	margin-left: 30px;
+	margin-top: 35px;
+}
+
+@media (max-width: 950px){
+
+	
+	nav.start{
+		position: absolute;
+		top: 125%;
+		left: 20%;
+		margin: 0 auto;
+	}
+
+	.cubito{
+		float: none;
+		position: absolute;
+		top: 60%;
+		left: 10%;
+	}
+
+	body{
+		height: 1000px;
+	}
+
+
+}
+
+
+
+

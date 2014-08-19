@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Math Adventures</title>
+		
+		<link rel="stylesheet" type="text/css" href="../css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="../css/component_cube.css" />			
+		<script src="../js/modernizr.custom.js"></script>
+
+
+		<!--	SOURCES BRIAN	-->
+		<script src="../js/jquery.js"></script>
+	    <script src="../js/touch.js"></script>    		
+	    <link rel="stylesheet" href="../css/touch.css" />
+	    <link rel="stylesheet" href="../css/cubo.css" />
+
+
+	    <script>
+			var colores = ["#33CCFF", "#43BF43", "#FF0000", "#FFFF58", "#FFFFFF", "#964319", "#A347FF", "#FF8533", "#FFA3D1"];	/* Colores que tienen disponibles las figuras */
+
+				var puntos 	= [];
+				var figs 	= [];
+				var numeros = [];
+				var ends	= [];
+
+
+			puntos[0] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.759px\" height=\"233.425px\" viewBox=\"0 0 244.759 233.425\" enable-background=\"new 0 0 244.759 233.425\" xml:space=\"preserve\"> <defs></defs><circle fill=\"#FFFFFF\" stroke=\"#000000\" stroke-width=\"2\" stroke-miterlimit=\"10\" cx=\"12.339\" cy=\"12.339\" r=\"11.339\"/><circle fill=\"none\" cx=\"68.672\" cy=\"12.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"125.005\" cy=\"12.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.339\" cy=\"12.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.672\" cy=\"12.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.339\" cy=\"83.672\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.672\" cy=\"83.672\" r=\"7.087\"/> <circle fill=\"none\" cx=\"125.005\" cy=\"83.672\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.339\" cy=\"83.672\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.672\" cy=\"83.672\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.339\" cy=\"155.005\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.672\" cy=\"155.005\" r=\"7.087\"/> <circle fill=\"none\" cx=\"125.005\" cy=\"155.005\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.339\" cy=\"155.005\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.672\" cy=\"155.005\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.339\" cy=\"226.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.672\" cy=\"226.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"125.005\" cy=\"226.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.339\" cy=\"226.339\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.672\" cy=\"226.339\" r=\"7.087\"/> </svg>";
+
+			puntos[1] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"> <defs></defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[2] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"><defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/><circle fill=\"none\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/></svg>";
+
+			puntos[3] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"> <defs></defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[4] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"> <defs> </defs><circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[5] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"233.173px\" viewBox=\"0 0 249.507 233.173\" enable-background=\"new 0 0 249.507 233.173\" xml:space=\"preserve\"> <defs> </defs><circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";			
+
+			puntos[6] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";			
+
+			puntos[7] = "<svg version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\" xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[8] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";			
+
+			puntos[9] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[10] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"233.173px\" viewBox=\"0 0 249.507 233.173\" enable-background=\"new 0 0 249.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+ 			puntos[11] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";				
+
+ 			puntos[12] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"233.173px\" viewBox=\"0 0 244.507 233.173\" enable-background=\"new 0 0 244.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+ 			puntos[13] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"233.173px\" viewBox=\"0 0 249.507 233.173\" enable-background=\"new 0 0 249.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";						
+
+			puntos[14] =  "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"233.173px\" viewBox=\"0 0 249.507 233.173\" enable-background=\"new 0 0 249.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[15] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"233.173px\" viewBox=\"0 0 249.507 233.173\" enable-background=\"new 0 0 249.507 233.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";						
+
+			puntos[16] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"244.507px\" height=\"238.173px\" viewBox=\"0 0 244.507 238.173\" enable-background=\"new 0 0 244.507 238.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+								
+			puntos[17] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"238.173px\" viewBox=\"0 0 249.507 238.173\" enable-background=\"new 0 0 249.507 238.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[18] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"238.173px\" viewBox=\"0 0 249.507 238.173\" enable-background=\"new 0 0 249.507 238.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[19] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"238.173px\" viewBox=\"0 0 249.507 238.173\" enable-background=\"new 0 0 249.507 238.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle fill=\"none\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+			puntos[20] = "<svg version=\"1.1\"   xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\"   x=\"0px\" y=\"0px\" width=\"249.507px\" height=\"238.173px\" viewBox=\"0 0 249.507 238.173\" enable-background=\"new 0 0 249.507 238.173\"   xml:space=\"preserve\"> <defs> </defs> <circle fill=\"#010202\" stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"12.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"83.42\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"154.753\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"12.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"68.42\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"124.753\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"181.087\" cy=\"226.087\" r=\"7.087\"/> <circle stroke=\"#000000\" stroke-width=\"10\" stroke-miterlimit=\"10\" cx=\"237.42\" cy=\"226.087\" r=\"7.087\"/> </svg>";
+
+
+
+			figs[0] = "<svg style=\"margin-top:-7px; margin-left:-3px;\" class=\"figurasss\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"201px\" height=\"201px\" viewBox=\"0 0 201 201\" enable-background=\"new 0 0 201 201\" xml:space=\"preserve\"> <defs> </defs> <circle class=\"fig\" stroke=\"\" stroke-miterlimit=\"10\" cx=\"100.5\" cy=\"100.5\" r=\"100\" ";	// CIRCULO
+			ends[0] = " /></svg>";
+
+			figs[1] = "<svg style=\"margin-top:-7px; margin-left:-3px;\" class=\"figurasss\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"199.425px\" height=\"199.425px\" viewBox=\"0 0 199.425 199.425\" enable-background=\"new 0 0 199.425 199.425\" xml:space=\"preserve\"> <defs> </defs> <rect class=\"fig\" x=\"0.5\" y=\"0.5\"  stroke=\"\" stroke-miterlimit=\"10\" width=\"198.425\" height=\"198.425\" ";  // CUADRADO
+			 ends[1] = " /></svg>";
+
+			figs[2] = "<svg style=\"margin-top:25px; margin-left:-1px;\" class=\"figurasss\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"199.425px\" height=\"136.443px\" viewBox=\"0 0 199.425 136.443\" enable-background=\"new 0 0 199.425 136.443\" xml:space=\"preserve\"> <defs> </defs> <rect class=\"fig\" x=\"0.5\" y=\"0.5\"  stroke=\"\" stroke-miterlimit=\"10\" width=\"198.425\" height=\"135.443\" ";
+			ends[2] = " /></svg>";	// RECTANGULO
+
+			figs[3] = "<svg style=\"margin-top:-10px; margin-left:-15px;\" class=\"figurasss\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:a=\"http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/\" x=\"0px\" y=\"0px\" width=\"222.671px\" height=\"192.839px\" viewBox=\"0 0 222.671 192.839\" enable-background=\"new 0 0 222.671 192.839\" xml:space=\"preserve\"> <defs> </defs> <polygon class=\"fig\" stroke=\"\" stroke-miterlimit=\"10\" points=\"0.866,192.339 111.335,1 221.805,192.339 \" ";	// TRIANGULO
+			ends[3] = " /></svg>";
+
+			//fill=\"#FFFFFF\"
+
+			numeros[0]	= "<p class=\"numero1\">0</p>";
+			numeros[1]	= "<p class=\"numero1\">1</p>";
+			numeros[2]	= "<p class=\"numero1\">2</p>";
+			numeros[3]	= "<p class=\"numero1\">3</p>";
+			numeros[4]	= "<p class=\"numero1\">4</p>";
+			numeros[5]	= "<p class=\"numero1\">5</p>";
+			numeros[6]	= "<p class=\"numero1\">6</p>";
+			numeros[7]	= "<p class=\"numero1\">7</p>";
+			numeros[8]	= "<p class=\"numero1\">8</p>";
+			numeros[9]	= "<p class=\"numero1\">9</p>";
+			numeros[10]	= "<p class=\"numero2\">10</p>";
+			numeros[11]	= "<p class=\"numero2\">11</p>";
+			numeros[12]	= "<p class=\"numero2\">12</p>";
+			numeros[13]	= "<p class=\"numero2\">13</p>";
+			numeros[14]	= "<p class=\"numero2\">14</p>";
+			numeros[15]	= "<p class=\"numero2\">15</p>";
+			numeros[16]	= "<p class=\"numero2\">16</p>";
+			numeros[17]	= "<p class=\"numero2\">17</p>";
+			numeros[18]	= "<p class=\"numero2\">18</p>";
+			numeros[19]	= "<p class=\"numero2\">19</p>";
+			numeros[20]	= "<p class=\"numero2\">20</p>";
+
+
+		    function reproducir(path){
+		        var audioPlayer = document.getElementsByTagName('audio')[0];
+		        if(audioPlayer == undefined) {
+		                        audioPlayer = new Audio();
+		                        document.getElementById("player").appendChild(audioPlayer);
+		                        audioPlayer.src=path;
+		                        audioPlayer.load();
+		                        audioPlayer.play();
+		        } else{
+		                        audioPlayer.src=path;
+		                        audioPlayer.load();
+		                        audioPlayer.play();
+		        }
+		    }
+
+			
+			$( document ).ready(function() {
+
+				var bandera = 0;	/* Es la bandera que indica el boton que esta pulsado */
+				var contenedor = 0;	/* Es un contador auxiliar para elegir la figura que aparece aleatoriamente */
+				var svgpuntos = 20;	/* Es el numero de puntos maximos que aparecen en las caras */
+				var ncolores = 9; 	/* Numero de colores disponibles	*/
+				var nfiguras = 4;	/* Numero de figuras que aparecen en las caras */
+				var bandFigNumPun 	= [];/* Indica si las caras tienen una Figura(1), Numero(2) o Puntos(3) */
+				var cdorColores		= [];	/* Lleva la cuenta del         color tienen las 6 caras del cubo */
+				var cdorFiguras		= [];	/* Lleva la cuenta de la figura  que tienen las 6 caras del cubo */
+				var cdorNumeros		= [];	/* Lleva la cuenta del numero    que tienen las 6 caras del cubo */
+				var cdorPuntos 		= [];	/* Lleva la cuenta de los puntos que tienen las 6 caras del cubo */
+				var bdr 			= 0;	/* Si esta en 1 es que coloreo una figura */
+				
+				bandFigNumPun[0] = 0; bandFigNumPun[1] = 0; bandFigNumPun[2] = 0; bandFigNumPun[3] = 0; bandFigNumPun[4] = 0; bandFigNumPun[5] = 0;
+				cdorColores[0] = 0; cdorColores[1] = 0; cdorColores[2] = 0; cdorColores[3] = 0; cdorColores[4] = 0; cdorColores[5] = 0;
+				cdorFiguras[0] = 0; cdorFiguras[1] = 0; cdorFiguras[2] = 0; cdorFiguras[3] = 0; cdorFiguras[4] = 0; cdorFiguras[5] = 0;
+				cdorNumeros[0] = 0; cdorNumeros[1] = 0; cdorNumeros[2] = 0; cdorNumeros[3] = 0; cdorNumeros[4] = 0; cdorNumeros[5] = 0;
+				cdorPuntos[0] = 1; cdorPuntos[1] = 1; cdorPuntos[2] = 1; cdorPuntos[3] = 1; cdorPuntos[4] = 1; cdorPuntos[5] = 1;
+  
+
+				$(".boton1").click( function(){	/* Se activa cuando boton "Color" esta activado */
+					bandera = 1;
+				});
+				$(".boton2").click( function(){	/* Se activa cuando boton "Shape" esta activado */
+					bandera = 2;
+				});
+				$(".boton3").click( function(){	/* Se activa cuando boton "Number" esta activado */
+					bandera = 3;
+				});
+				$(".boton4").click( function(){	/* Se activa cuando boton "Dots" esta activado */
+					bandera = 4;
+				});
+
+
+				$("#done").click( function(){	/* Se activa cuando boton "DONE" es activado */
+
+					$('.botons').css('visibility','hidden');
+					$('.cubito').css('top','2%');
+					$('.start').css('visibility','hidden');
+					$('.roll').css('visibility','visible');
+					$('.roll').css('top','60%');
+					
+				});
+
+				
+		        $(".cara").click(function(event){	/* Se activa cuando dan click en una cara del dado */
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		            if(bandera == 1){	/* Entra aqui cuando boton "color" esta activado */
+		                
+		                reproducir("../audio/click.mp3");
+
+		            	if($(this).is(".c1")){
+		            		if(cdorColores[0] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[0]++]);
+		                	}
+		               		else{
+		               			cdorColores[0] = 0;
+		               			$(this).css("background-color",colores[cdorColores[0]++]);
+		               		}
+		               	}
+
+		            	if($(this).is(".c2")){
+		            		if(cdorColores[1] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[1]++]);
+		                	}
+		               		else{
+		               			cdorColores[1] = 0;
+		               			$(this).css("background-color",colores[cdorColores[1]++]);
+		               		}
+		               	}
+
+		            	if($(this).is(".c3")){
+		            		if(cdorColores[2] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[2]++]);
+		                	}
+		               		else{
+		               			cdorColores[2] = 0;
+		               			$(this).css("background-color",colores[cdorColores[2]++]);
+		               		}
+		               	}
+
+		            	if($(this).is(".c4")){
+		            		if(cdorColores[3] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[3]++]);
+		                	}
+		               		else{
+		               			cdorColores[3] = 0;
+		               			$(this).css("background-color",colores[cdorColores[3]++]);
+		               		}
+		               	}
+
+		            	if($(this).is(".c5")){
+		            		if(cdorColores[4] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[4]++]);
+		                	}
+		               		else{
+		               			cdorColores[4] = 0;
+		               			$(this).css("background-color",colores[cdorColores[4]++]);
+		               		}
+		               	}
+
+		            	if($(this).is(".c6")){
+		            		if(cdorColores[5] < ncolores){
+		                		$(this).css("background-color",colores[cdorColores[5]++]);
+		                	}
+		               		else{
+		               			cdorColores[5] = 0;
+		               			$(this).css("background-color",colores[cdorColores[5]++]);
+		               		}
+		               	}		               			               			               			               	
+		               	$(this).css("background-image","none");        
+		        	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		        	if (bandera == 2){	/* Entra cuando boton "Shape(1) esta activado" */
+
+		        		reproducir("../audio/click.mp3");
+
+		        		if($(this).is(".c1")){	/* Tratamiento de cara 1 (superior)	*/ /* Si da click en cara 1... */
+		        			if(bandFigNumPun[0]==0 || bandFigNumPun[0]==1 ){
+		        				if(cdorFiguras[0] < 4)
+		        					$(".centrar1").html(figs[cdorFiguras[0]++]+ends[0]);
+		        				else{
+		        					cdorFiguras[0] = 0;
+		        					$(".centrar1").html(figs[cdorFiguras[0]++]+ends[0]);
+		        				}
+		        				
+		        				bandFigNumPun[0] = 1;
+		        			}
+		        		}
+
+		        		if($(this).is(".c2")){	/* Tratamiento de cara 2 (frontal)	*/ /* Si da click en cara 2... */
+		        			if(bandFigNumPun[1]==0 || bandFigNumPun[1]==1 ){
+		        				if(cdorFiguras[1] < 4)
+		        					$(".centrar2").html(figs[cdorFiguras[1]++]+ends[1]);
+		        				else{
+		        					cdorFiguras[1] = 0;
+		        					$(".centrar2").html(figs[(cdorFiguras[1]++)]+ends[1]);
+		        				}
+		        				
+		        				bandFigNumPun[1] = 1;
+		        			}
+		        		}
+
+		        		if($(this).is(".c3")){	/* FIGURA	*/ /* Si da click en cara 3... */
+		        			if(bandFigNumPun[2]==0 || bandFigNumPun[2]==1 ){
+		        				if(cdorFiguras[2] < 4)
+		        					$(".centrar3").html(figs[cdorFiguras[2]++]+ends[2]);
+		        				else{
+		        					cdorFiguras[2] = 0;
+		        					$(".centrar3").html(figs[(cdorFiguras[2]++)]+ends[2]);
+		        				}
+		        				
+		        				bandFigNumPun[2] = 1;
+		        			}
+		        		}
+
+		        		if($(this).is(".c4")){	/* FIGURA	*/ /* Si da click en cara 4... */
+		        			if(bandFigNumPun[3]==0 || bandFigNumPun[3]==1 ){
+		        				if(cdorFiguras[3] < 4)
+		        					$(".centrar4").html(figs[cdorFiguras[3]++]+ends[3]);
+		        				else{
+		        					cdorFiguras[3] = 0;
+		        					$(".centrar4").html(figs[(cdorFiguras[3]++)]+ends[3]);
+		        				}
+		        				
+		        				bandFigNumPun[3] = 1;
+		        			}
+		        		}
+
+		        		if($(this).is(".c5")){	/* FIGURA	*/ /* Si da click en cara 5... */
+		        			if(bandFigNumPun[4]==0 || bandFigNumPun[4]==1 ){
+
+		        				if(cdorFiguras[4] < 4){
+		        					$(".centrar5").html(figs[cdorFiguras[4]++]+ends[1]);
+		        				}
+		        				else{
+		        					cdorFiguras[4] = 0;
+		        					$(".centrar5").html(figs[(cdorFiguras[4]++)]+ends[1]);
+		        				}
+		        				
+		        				bandFigNumPun[4] = 1;
+		        			}
+		        		}
+
+		        		if($(this).is(".c6")){	/* FIGURA	*/ /* Si da click en cara 6... */
+		        			if(bandFigNumPun[5]==0 || bandFigNumPun[5]==1 ){
+		        				if(cdorFiguras[5] < 4)
+		        					$(".centrar6").html(figs[cdorFiguras[5]++]+ends[1]);
+		        				else{
+		        					cdorFiguras[5] = 0;
+		        					$(".centrar6").html(figs[(cdorFiguras[5]++)]+ends[1]);
+		        				}
+		        				
+		        				bandFigNumPun[5] = 1;
+		        			}
+		        		}		        				        				        				        		
+
+		        	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		        	if(bandera == 3){ /* Entra cuando boton "Number(2)" esta activado */	
+
+		        		reproducir("../audio/click.mp3");
+
+		        		if($(this).is(".c1")){
+		        			if(bandFigNumPun[0]==0 || bandFigNumPun[0]==2 ){
+			        			if(cdorNumeros[0] < 21){
+			        				$(".centrar1").html(numeros[cdorNumeros[0]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[0] = 0;
+			        				$(".centrar1").html(numeros[cdorNumeros[0]++]);
+			        			}
+			        			bandFigNumPun[0] = 2; }
+			        	}
+
+		        		if($(this).is(".c2")){
+		        			if(bandFigNumPun[1]==0 || bandFigNumPun[1]==2 ){
+			        			if(cdorNumeros[1] < 21){
+			        				$(".centrar2").html(numeros[cdorNumeros[1]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[1] = 0;
+			        				$(".centrar2").html(numeros[cdorNumeros[1]++]);
+			        			}
+			        			bandFigNumPun[1] = 2; }
+			        	}
+
+		        		if($(this).is(".c3")){
+		        			if(bandFigNumPun[2]==0 || bandFigNumPun[2]==2 ){
+			        			if(cdorNumeros[2] < 21){
+			        				$(".centrar3").html(numeros[cdorNumeros[2]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[2] = 0;
+			        				$(".centrar3").html(numeros[cdorNumeros[2]++]);
+			        			}
+			        			bandFigNumPun[2] = 2; }
+			        	}
+
+		        		if($(this).is(".c4")){
+		        			if(bandFigNumPun[3]==0 || bandFigNumPun[3]==2 ){
+			        			if(cdorNumeros[3] < 21){
+			        				$(".centrar4").html(numeros[cdorNumeros[3]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[3] = 0;
+			        				$(".centrar4").html(numeros[cdorNumeros[3]++]);
+			        			}
+			        			bandFigNumPun[3] = 2; }
+			        	}
+
+		        		if($(this).is(".c5")){
+		        			if(bandFigNumPun[4]==0 || bandFigNumPun[4]==2 ){
+			        			if(cdorNumeros[4] < 21){
+			        				$(".centrar5").html(numeros[cdorNumeros[4]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[4] = 0;
+			        				$(".centrar5").html(numeros[cdorNumeros[4]++]);
+			        			}
+			        			bandFigNumPun[4] = 2; }
+			        	}
+
+		        		if($(this).is(".c6")){
+		        			if(bandFigNumPun[5]==0 || bandFigNumPun[5]==2 ){
+			        			if(cdorNumeros[5] < 21){
+			        				$(".centrar6").html(numeros[cdorNumeros[5]++]);
+			        			}
+			        			else{
+			        				cdorNumeros[5] = 0;
+			        				$(".centrar6").html(numeros[cdorNumeros[5]++]);
+			        			}
+			        			bandFigNumPun[5] = 2; }
+			        	}
+		        	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		        	if(bandera == 4 ){ /* Entra cuando boton "Dots(3)" esta activado */
+
+		        		reproducir("../audio/click.mp3");
+
+		        		if($(this).is(".c1")){
+		        			if(bandFigNumPun[0]==0 || bandFigNumPun[0]==3 ){
+		        				if(cdorPuntos[0] < 20){
+		        					$(".points1").empty();
+									$("<div class=\"points1\" style=\"z-index:100;\">"+puntos[cdorPuntos[0]++]+"</div>").appendTo( $(".c1") );
+									bandFigNumPun[0] = 3;
+								}
+
+								else{
+		        					cdorPuntos[0] = 1;
+									$(".points1").empty();
+									$("<div class=\"points1\" style=\"z-index:100;\">"+puntos[cdorPuntos[0]++]+"</div>").appendTo( $(".c1") );
+		        				}	
+		        			}
+		        		}
+
+		        		if($(this).is(".c2")){
+		        			if(bandFigNumPun[1]==0 || bandFigNumPun[1]==3 ){
+		        				if(cdorPuntos[1] < 20){
+		        					$(".points2").empty();
+									$("<div class=\"points2\" style=\"z-index:100;\">"+puntos[cdorPuntos[1]++]+"</div>").appendTo( $(".c2") );
+									bandFigNumPun[1] = 3;
+								}
+
+								else{
+		        					cdorPuntos[1] = 1;
+									$(".points2").empty();
+									$("<div class=\"points2\" style=\"z-index:100;\">"+puntos[cdorPuntos[1]++]+"</div>").appendTo( $(".c2") );
+		        				}	
+		        			}
+		        		}
+
+
+		        		if($(this).is(".c3")){
+		        			if(bandFigNumPun[2]==0 || bandFigNumPun[2]==3 ){
+		        				if(cdorPuntos[2] < 20){
+		        					$(".points3").empty();
+									$("<div class=\"points3\" style=\"z-index:100;\">"+puntos[cdorPuntos[2]++]+"</div>").appendTo( $(".c3") );
+									bandFigNumPun[2] = 3;
+								}
+
+								else{
+		        					cdorPuntos[2] = 1;
+									$(".points3").empty();
+									$("<div class=\"points3\" style=\"z-index:100;\">"+puntos[cdorPuntos[2]++]+"</div>").appendTo( $(".c3") );
+		        				}	
+		        			}
+		        		}
+
+		        		if($(this).is(".c4")){
+		        			if(bandFigNumPun[3]==0 || bandFigNumPun[3]==3 ){
+		        				if(cdorPuntos[3] < 20){
+		        					$(".points4").empty();
+									$("<div class=\"points4\" style=\"z-index:100;\">"+puntos[cdorPuntos[3]++]+"</div>").appendTo( $(".c4") );
+									bandFigNumPun[3] = 3;
+								}
+
+								else{
+		        					cdorPuntos[3] = 1;
+									$(".points4").empty();
+									$("<div class=\"points4\" style=\"z-index:100;\">"+puntos[cdorPuntos[3]++]+"</div>").appendTo( $(".c4") );
+		        				}	
+		        			}
+		        		}
+
+
+		        		if($(this).is(".c5")){
+		        			if(bandFigNumPun[4]==0 || bandFigNumPun[4]==3 ){
+		        				if(cdorPuntos[4] < 20){
+		        					$(".points5").empty();
+									$("<div class=\"points5\" style=\"z-index:100;\">"+puntos[cdorPuntos[4]++]+"</div>").appendTo( $(".c5") );
+									bandFigNumPun[4] = 3;
+								}
+
+								else{
+		        					cdorPuntos[4] = 1;
+									$(".points5").empty();
+									$("<div class=\"points5\" style=\"z-index:100;\">"+puntos[cdorPuntos[4]++]+"</div>").appendTo( $(".c5") );
+		        				}	
+		        			}
+		        		}
+
+		        		if($(this).is(".c6")){
+		        			if(bandFigNumPun[5]==0 || bandFigNumPun[5]==3 ){
+		        				if(cdorPuntos[5] < 20){
+		        					$(".points6").empty();
+									$("<div class=\"points6\" style=\"z-index:100;\">"+puntos[cdorPuntos[5]++]+"</div>").appendTo( $(".c6") );
+									bandFigNumPun[5] = 3;
+								}
+
+								else{
+		        					cdorPuntos[5] = 1;
+									$(".points6").empty();
+									$("<div class=\"points6\" style=\"z-index:100;\">"+puntos[cdorPuntos[5]++]+"</div>").appendTo( $(".c6") );
+		        				}	
+		        			}
+		        		}		        				        		
+
+		        	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+				$(".centrar1,.centrar2,.centrar3,.centrar4,.centrar5,.centrar6").click(function(event){
+
+					if( bandera == 1){
+
+					if($(this).is(".centrar1") && bandFigNumPun[0] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[0] < ncolores ){
+							$(".centrar1").html(figs[cdorFiguras[0]-1]+" fill=\""+colores[cdorColores[0]]+"\""+ends[0]);
+						}
+						else{
+							cdorColores[0] = 0;
+							$(".centrar1").html(figs[cdorFiguras[0]-1]+" fill=\""+colores[cdorColores[0]]+"\""+ends[0]);
+						}
+						cdorColores[0]++;
+						bdr = 1;
+					}
+
+					if($(this).is(".centrar2") && bandFigNumPun[1] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[1] < ncolores ){
+							$(".centrar2").html(figs[cdorFiguras[1]-1]+" fill=\""+colores[cdorColores[1]]+"\""+ends[1]);
+						}
+						else{
+							cdorColores[1] = 0;
+							$(".centrar2").html(figs[cdorFiguras[1]-1]+" fill=\""+colores[cdorColores[1]]+"\""+ends[1]);
+						}
+						cdorColores[1]++;
+						bdr = 1;
+					} 
+
+					if($(this).is(".centrar3") && bandFigNumPun[2] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[2] < ncolores ){
+							$(".centrar3").html(figs[cdorFiguras[2]-1]+" fill=\""+colores[cdorColores[2]]+"\""+ends[2]);
+						}
+						else{
+							cdorColores[2] = 0;
+							$(".centrar3").html(figs[cdorFiguras[2]-1]+" fill=\""+colores[cdorColores[2]]+"\""+ends[2]);
+						}
+						cdorColores[2]++;
+						bdr = 1;
+					}
+
+
+					if($(this).is(".centrar4") && bandFigNumPun[3] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[3] < ncolores ){
+							$(".centrar4").html(figs[cdorFiguras[3]-1]+" fill=\""+colores[cdorColores[3]]+"\""+ends[3]);
+						}
+						else{
+							cdorColores[3] = 0;
+							$(".centrar4").html(figs[cdorFiguras[3]-1]+" fill=\""+colores[cdorColores[3]]+"\""+ends[3]);
+						}
+						cdorColores[3]++;
+						bdr = 1;
+					}
+
+					if($(this).is(".centrar5") && bandFigNumPun[4] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[4] < ncolores ){
+							$(".centrar5").html(figs[cdorFiguras[4]-1]+" fill=\""+colores[cdorColores[4]]+"\""+ends[3]);
+						}
+						else{
+							cdorColores[4] = 0;
+							$(".centrar5").html(figs[cdorFiguras[4]-1]+" fill=\""+colores[cdorColores[4]]+"\""+ends[3]);
+						}
+						cdorColores[4]++;
+						bdr = 1;
+					}
+
+					if($(this).is(".centrar6") && bandFigNumPun[5] == 1 ){
+						event.stopPropagation();
+						if (cdorColores[5] < ncolores ){
+							$(".centrar6").html(figs[cdorFiguras[5]-1]+" fill=\""+colores[cdorColores[5]]+"\""+ends[3]);
+						}
+						else{
+							cdorColores[5] = 0;
+							$(".centrar6").html(figs[cdorFiguras[5]-1]+" fill=\""+colores[cdorColores[5]]+"\""+ends[3]);
+						}
+						cdorColores[5]++;
+						bdr = 1;
+					}					
+
+
+					}
+
+				});
+
+
+		        });
+			});
+	    </script>
+
+	</head>
+	<body>
+		<div class="container_cube">
+			<section class="botons">
+				<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+					<h2>Customize the Digital Pocket Cube</h2>
+					<ul>
+						<li><input class="boton1" id="r1" name="r1" type="radio"><label for="r1">Colors</label></li>
+						<li><input class="boton2" id="r2" name="r1" type="radio"><label for="r2">Shapes</label></li>
+						<li><input class="boton3" id="r3" name="r1" type="radio"><label for="r3">Numbers</label></li>
+						<li><input class="boton4" id="r4" name="r1" type="radio"><label for="r4">Dots</label></li>
+					</ul>
+				</form>
+			</section>
+
+
+			<div class="cubito">
+				<article class="viewport">
+			        <section class="cube">
+			            <div class="cara pintar c1" id="superior">
+			                <!--CARA SUPERIOR-->
+			                <div class="centrar1">
+							</div>
+			            </div>
+			            
+			            <div class="cara pintar c2" id="frontal">
+			                <!--CARA FRONTAL-->
+			                <div class="centrar2">
+							</div>
+			            </div>
+
+			            <div class="cara pintar c3" id="derecha">
+			                <!--CARA DERECHA-->		
+			                <div class="centrar3">
+							</div>
+			            </div>
+
+			            <div class="cara pintar c4" id="trasera">
+			                <!--CARA TRASERA-->
+			                <div class="centrar4">
+							</div>
+			            </div>
+			            
+			            <div class="cara pintar c5" id="izquierda">
+			                <!--CARA IZQUIERDA-->		
+			                <div class="centrar5 sizer2">
+							</div>
+			            </div>
+			            
+			            <div class="cara pintar c6" id="inferior">
+			                <!--CARA INFERIOR-->	        		
+			                <div class="centrar6">
+							</div>
+			            </div>
+			        </section>
+	    		</article>
+			</div>
+
+			<nav class="start" ><a id="done">Done</a></nav>
+			<nav class="start roll" ><a id="done">Roll</a></nav>
+		</div>
+		<!-- /container -->	
+
+		<div id="player"></div>
+
+
+		<script src="../js/svgcheckbx.js"></script>	
+	</body>
+	<div class="footer"><img src="../img/grass.png"></div>
+</html>
